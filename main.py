@@ -6,12 +6,11 @@ from entsoe import EntsoePandasClient
 
 # ==========================================
 # 1. ДАННИ И ИЗТЕГЛЯНЕ ОТ ENTSO-E
-# ==========================================
-# Забележка: API ключът се взима от системните променливи за сигурност
+
 api_key = os.environ.get("ENTSOE_API_KEY", "ce4d798d-e828-425e-9529-1570fb8aad77")
 
-start = pd.Timestamp("2027-01-01 00:00", tz="Europe/Brussels")
-end = pd.Timestamp("2027-05-01 00:00", tz="Europe/Brussels")
+start = pd.Timestamp("2026-07-01 00:00", tz="Europe/Brussels")
+end = pd.Timestamp("2026-03-09 00:00", tz="Europe/Brussels")
 
 print("Изтегляне на данни за ден напред от ENTSO-E за България (BG)...")
 try:
@@ -26,7 +25,6 @@ except Exception as e:
       f" да изисква друг достъп): {e}"
   )
   print("Генериране на демо/исторически структуриран пример за демонстрация...")
-  # Създаване на дата индекс с 15-минутна резолюция за периода
   idx = pd.date_range(
       start="2026-07-01 00:00:00",
       end="2026-09-01 00:00:00",
@@ -44,12 +42,11 @@ except Exception as e:
 
 # ==========================================
 # 2. ПОДГОТОВКА И ВАЛИДИРАНЕ НА ДАННИТЕ
-# ==========================================
 # Преобразуване и структуриране според изискванията на Задача 1
 df = df.reset_index()
-df.rename(columns={df.columns[0]: "utc_timestamp"}, inplace=True)
+df = df.rename(columns={df.columns[0]: "utc_timestamp"})
 
-# Уверете се, че времевата зона е UTC за utc_timestamp
+# utc_timestamp
 if df["utc_timestamp"].dt.tz is None:
   df["utc_timestamp"] = pd.to_datetime(df["utc_timestamp"]).dt.tz_localize(
       "UTC"
@@ -57,10 +54,8 @@ if df["utc_timestamp"].dt.tz is None:
 else:
   df["utc_timestamp"] = df["utc_timestamp"].dt.tz_convert("UTC")
 
-# Локално време в София (Europe/Sofia)
 df["local_timestamp"] = df["utc_timestamp"].dt.tz_convert("Europe/Sofia")
 
-# Пазарен времеви печат (market-time timestamp)
 df["market_timestamp"] = df["local_timestamp"]
 
 # Дата на доставка (delivery date) - базирана на локалния ден
