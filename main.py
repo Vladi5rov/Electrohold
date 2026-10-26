@@ -10,7 +10,7 @@ from entsoe import EntsoePandasClient
 api_key = os.environ.get("ENTSOE_API_KEY", "")
 
 start = pd.Timestamp("2026-07-01 00:00", tz="Europe/Brussels")
-end = pd.Timestamp("2026-03-09 00:00", tz="Europe/Brussels")
+end = pd.Timestamp("2026-09-01 00:00", tz="Europe/Brussels")
 
 print("Изтегляне на данни за ден напред от ENTSO-E за България (BG)...")
 try:
