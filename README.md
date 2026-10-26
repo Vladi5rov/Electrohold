@@ -12,7 +12,7 @@ This repository contains the solution for the Power Market Analyst recruitment a
    pip install -r requirements.txt
    
 2. Set ENTSO-E API Key (optional):
-export ENTSO_API_KEY="ce4d798d-e828-425e-9529-1570fb8aad77"
+export ENTSO_API_KEY="...."
 
 3. Execute the analysis script:
 python main.py

@@ -7,7 +7,7 @@ from entsoe import EntsoePandasClient
 # ==========================================
 # 1. ДАННИ И ИЗТЕГЛЯНЕ ОТ ENTSO-E
 
-api_key = os.environ.get("ENTSOE_API_KEY", "ce4d798d-e828-425e-9529-1570fb8aad77")
+api_key = os.environ.get("ENTSOE_API_KEY", "")
 
 start = pd.Timestamp("2026-07-01 00:00", tz="Europe/Brussels")
 end = pd.Timestamp("2026-03-09 00:00", tz="Europe/Brussels")
