@@ -10,8 +10,8 @@ from entsoe import EntsoePandasClient
 # Забележка: API ключът се взима от системните променливи за сигурност
 api_key = os.environ.get("ENTSOE_API_KEY", "ce4d798d-e828-425e-9529-1570fb8aad77")
 
-start = pd.Timestamp("2026-07-01 00:00", tz="Europe/Brussels")
-end = pd.Timestamp("2026-11-01 00:00", tz="Europe/Brussels")
+start = pd.Timestamp("2027-01-01 00:00", tz="Europe/Brussels")
+end = pd.Timestamp("2027-05-01 00:00", tz="Europe/Brussels")
 
 print("Изтегляне на данни за ден напред от ENTSO-E за България (BG)...")
 try:
